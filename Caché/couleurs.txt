@@ -1,0 +1,8 @@
+#e0f5a1 vert claire
+#305206 vert foncé
+#eb7c21 orange
+#ffc582 orange claire
+#29f50e vert fluo
+#444444 noir
+#ff0000 rouge
+#ddd gris
