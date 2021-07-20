@@ -22,6 +22,7 @@ class Interface(tk.Tk):
         self.frame_menu()
 
     def INIT(self):
+        
         try: 
             self.frame_acceuil_inactif()
         except:
