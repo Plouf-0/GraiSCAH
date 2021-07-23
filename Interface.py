@@ -861,10 +861,7 @@ class Interface(tk.Tk):
         for i in range(len(get_transaction())):
             table_trans.insert(parent = '', index = i, iid = i, values = (get_transaction()[i]))
 
-        self.bouton_fiche_trans = tk.Button(self.frame_his_trans_buttons, text = "Aller\nà la fiche\nde la transaction", font = ("Montserrat", 14), bg = "#eb7c21", fg = "#e0f5a1", relief = FLAT,)
-        self.bouton_fiche_trans.pack(side = LEFT)
-
-        self.bouton_ajouter_trans = tk.Button(self.frame_his_trans_buttons, text = "Ajouter\nune transaction\n", font = ("Montserrat", 14), bg = "#e0f5a1", fg = "#444444", relief = FLAT, command = lambda: self.frame_add_trans_actif())
+        self.bouton_ajouter_trans = tk.Button(self.frame_his_trans_buttons, text = "Ajouter\nune transaction\n", font = ("Montserrat", 14), bg = "#eb7c21", fg = "#444444", relief = FLAT, command = lambda: self.frame_add_trans_actif())
         self.bouton_ajouter_trans.pack(side = LEFT)
 
         self.bouton_supr_trans = tk.Button(self.frame_his_trans_buttons, text = "Suprimer\nla transaction\n", font = ("Montserrat", 14), bg = "#e0f5a1", fg = "#444444", relief = FLAT, command = lambda: suppr_trans())
