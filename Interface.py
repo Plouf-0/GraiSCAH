@@ -3,10 +3,13 @@ from tkinter import PhotoImage, ttk, messagebox
 from tkinter.constants import BOTTOM, FLAT, LEFT, YES, BOTH, RIGHT, Y, X, VERTICAL, NO, CENTER, TOP
 
 from main import *
+from cstecouleur import *
 
 from tkcalendar import DateEntry
 
 ######################################################
+
+
 
 class Interface(tk.Tk):
     
@@ -17,7 +20,7 @@ class Interface(tk.Tk):
         self.maxsize(2048, 500000)
         self.title("Grainotheque SCAH   Section Jardinage")
         self.iconbitmap("LOGO_SCAH_OFFICIEL_2014-1_avec_titre.ico")
-        self.config(bg = "#e0f5a1")
+        self.config(bg = vert_claire)
         self.Menubar()
         self.frame_menu()
 
@@ -74,31 +77,31 @@ class Interface(tk.Tk):
         
         self.INIT()
 
-        self.framenu = tk.Frame(self, bg = "#e0f5a1")
+        self.framenu = tk.Frame(self, bg = vert_claire)
         self.framenu.grid()
 
-        self.framenubout = tk.Frame(self.framenu, bg = "#e0f5a1")
+        self.framenubout = tk.Frame(self.framenu, bg = vert_claire)
         self.framenubout.grid(row = 1, padx = 0, sticky = "w")
 
-        self.framenupic = tk.Frame(self.framenu, bg = "#e0f5a1")
+        self.framenupic = tk.Frame(self.framenu, bg = vert_claire)
         self.framenupic.grid(row = 2)
         
-        self.label = tk.Label(self.framenubout, text = "Bienvenue sur la Grainotheque des Jardiniers", bg = "#e0f5a1", fg = "#305206", font = ("Oswald", 30))
+        self.label = tk.Label(self.framenubout, text = "Bienvenue sur la Grainotheque des Jardiniers", bg = vert_claire, fg = vert_foncé, font = ("Oswald", 30))
         self.label.pack()
         
-        self.bouton_acceuil = tk.Button(self.framenubout, text = "Acceuil",font = ("Montserrat", 14), bg = "#eb7c21", fg = "#e0f5a1", relief = FLAT, command = lambda: self.frame_acceuil_actif())
+        self.bouton_acceuil = tk.Button(self.framenubout, text = "Acceuil",font = ("Montserrat", 14), bg = orange, fg = vert_claire, relief = FLAT, command = lambda: self.frame_acceuil_actif())
         self.bouton_acceuil.pack(side = LEFT, anchor = "n", pady=20)
         
-        self.bouton_graines = tk.Button(self.framenubout, text = "Graines",font = ("Montserrat", 14), bg = "#e0f5a1", fg = "#444444", relief = FLAT, command = lambda: [self.framenu.grid_forget(), self.frame_graineshist_actif()])
+        self.bouton_graines = tk.Button(self.framenubout, text = "Graines",font = ("Montserrat", 14), bg = vert_claire, fg = noir, relief = FLAT, command = lambda: [self.framenu.grid_forget(), self.frame_graineshist_actif()])
         self.bouton_graines.pack(side = LEFT, anchor = "n", pady=20)
         
-        self.bouton_membres = tk.Button(self.framenubout, text = "Membres",font = ("Montserrat", 14), bg = "#e0f5a1", fg = "#444444", relief = FLAT, command = lambda: [self.framenu.grid_forget(), self.frame_membrehist_actif()])
+        self.bouton_membres = tk.Button(self.framenubout, text = "Membres",font = ("Montserrat", 14), bg = vert_claire, fg = noir, relief = FLAT, command = lambda: [self.framenu.grid_forget(), self.frame_membrehist_actif()])
         self.bouton_membres.pack(side = LEFT, anchor = "n", pady=20)
         
-        self.bouton_transaction = tk.Button(self.framenubout, text = "Transactions",font = ("Montserrat", 14), bg = "#e0f5a1", fg = "#444444", relief = FLAT, command = lambda: [self.framenu.grid_forget(), self.frame_transhist_actif()])
+        self.bouton_transaction = tk.Button(self.framenubout, text = "Transactions",font = ("Montserrat", 14), bg = vert_claire, fg = noir, relief = FLAT, command = lambda: [self.framenu.grid_forget(), self.frame_transhist_actif()])
         self.bouton_transaction.pack(side = LEFT, anchor = "n", pady=20)
 
-        can1 = tk.Canvas(self.framenupic, width = 800, height = 500, bg = "#e0f5a1", highlightthickness = 0)
+        can1 = tk.Canvas(self.framenupic, width = 800, height = 500, bg = vert_claire, highlightthickness = 0)
         imagescah = PhotoImage(file = "LOGO_SCAH_OFFICIEL_2014-1_avec_titre.gif")
         can1.create_image(520, 250, image = imagescah)
         can1.image = imagescah
@@ -115,19 +118,19 @@ class Interface(tk.Tk):
         
         self.INIT()
 
-        self.frame_his_grain_fond = tk.Frame(self, bg = "#e0f5a1")
+        self.frame_his_grain_fond = tk.Frame(self, bg = vert_claire)
         self.frame_his_grain_fond.grid()
 
-        self.frame_his_grain_heading = tk.Frame(self.frame_his_grain_fond, bg = "#e0f5a1")
+        self.frame_his_grain_heading = tk.Frame(self.frame_his_grain_fond, bg = vert_claire)
         self.frame_his_grain_heading.grid(row = 1, sticky = "nw")
 
-        self.frame_his_grain_table = tk.Frame(self.frame_his_grain_fond, bg = "#eb7c21", borderwidth = 2)
+        self.frame_his_grain_table = tk.Frame(self.frame_his_grain_fond, bg = orange, borderwidth = 2)
         self.frame_his_grain_table.grid(row = 2, pady = 20, padx = 35)
         
-        self.frame_his_grain_buttons = tk.Frame(self.frame_his_grain_fond, bg = "#e0f5a1")
+        self.frame_his_grain_buttons = tk.Frame(self.frame_his_grain_fond, bg = vert_claire)
         self.frame_his_grain_buttons.grid(row = 3, sticky = "we")
 
-        self.label = tk.Label(self.frame_his_grain_heading, text = "Inventaire de toutes les graines disponibles", bg = "#e0f5a1", fg = "#305206", font = ("Oswald", 30))
+        self.label = tk.Label(self.frame_his_grain_heading, text = "Inventaire de toutes les graines disponibles", bg = vert_claire, fg = vert_foncé, font = ("Oswald", 30))
         self.label.pack()
         
         table_seeds = ttk.Treeview(self.frame_his_grain_table, columns = (1, 2, 3, 4, 5, 6, 7, 8, 9), show = 'headings', height = 30)
@@ -162,22 +165,22 @@ class Interface(tk.Tk):
         for i in range(len(get_seeds_values())):
             table_seeds.insert(parent = '', index = i, iid = i, values = (get_seeds_values()[i]))
 
-        self.bouton_fiche_graine = tk.Button(self.frame_his_grain_buttons, text = "Aller\nà la fiche\nde la graine", font = ("Montserrat", 14), bg = "#eb7c21", fg = "#e0f5a1", relief = FLAT, command = lambda: select_graine())
+        self.bouton_fiche_graine = tk.Button(self.frame_his_grain_buttons, text = "Aller\nà la fiche\nde la graine", font = ("Montserrat", 14), bg = orange, fg = vert_claire, relief = FLAT, command = lambda: select_graine())
         self.bouton_fiche_graine.pack(side = LEFT)
 
-        self.bouton_ajouter_graine = tk.Button(self.frame_his_grain_buttons, text = "Ajouter\nla graine\n", font = ("Montserrat", 14), bg = "#e0f5a1", fg = "#444444", relief = FLAT, command = lambda: self.frame_add_graine_actif())
+        self.bouton_ajouter_graine = tk.Button(self.frame_his_grain_buttons, text = "Ajouter\nla graine\n", font = ("Montserrat", 14), bg = vert_claire, fg = noir, relief = FLAT, command = lambda: self.frame_add_graine_actif())
         self.bouton_ajouter_graine.pack(side = LEFT)
 
-        self.bouton_modif_graine = tk.Button(self.frame_his_grain_buttons, text = "Modifier\nla graine\n", font = ("Montserrat", 14), bg = "#e0f5a1", fg = "#444444", relief = FLAT, command = lambda: get_item())
+        self.bouton_modif_graine = tk.Button(self.frame_his_grain_buttons, text = "Modifier\nla graine\n", font = ("Montserrat", 14), bg = vert_claire, fg = noir, relief = FLAT, command = lambda: get_item())
         self.bouton_modif_graine.pack(side = LEFT)
 
-        self.bouton_supr_graine = tk.Button(self.frame_his_grain_buttons, text = "Suprimer\nla graine\n", font = ("Montserrat", 14), bg = "#e0f5a1", fg = "#444444", relief = FLAT, command = lambda: suppr_graine())
+        self.bouton_supr_graine = tk.Button(self.frame_his_grain_buttons, text = "Suprimer\nla graine\n", font = ("Montserrat", 14), bg = vert_claire, fg = noir, relief = FLAT, command = lambda: suppr_graine())
         self.bouton_supr_graine.pack(side = LEFT)
 
-        self.bouton_undo_graine = tk.Button(self.frame_his_grain_buttons, text = "Annuler\naction\n(wip)", font = ("Montserrat", 14), bg = "#e0f5a1", fg = "#444444", relief = FLAT, command = lambda: annuler_action())
+        self.bouton_undo_graine = tk.Button(self.frame_his_grain_buttons, text = "Annuler\naction\n(wip)", font = ("Montserrat", 14), bg = vert_claire, fg = noir, relief = FLAT, command = lambda: annuler_action())
         self.bouton_undo_graine.pack(side = LEFT)
 
-        self.bouton_acceuil = tk.Button(self.frame_his_grain_buttons, text = "Revenir\nau\nmenu", font = ("Montserrat", 14), bg = "#e0f5a1", fg = "#444444", relief = FLAT, command = lambda: self.frame_acceuil_actif())
+        self.bouton_acceuil = tk.Button(self.frame_his_grain_buttons, text = "Revenir\nau\nmenu", font = ("Montserrat", 14), bg = vert_claire, fg = noir, relief = FLAT, command = lambda: self.frame_acceuil_actif())
         self.bouton_acceuil.pack(side = LEFT)
 
         def select_graine():
@@ -226,22 +229,22 @@ class Interface(tk.Tk):
 
         self.INIT()
 
-        self.frame_princ_graine_add = tk.Frame(self, bg = "#e0f5a1")
+        self.frame_princ_graine_add = tk.Frame(self, bg = vert_claire)
         self.frame_princ_graine_add.grid(sticky = "we")
 
-        self.frame_graine_add_labelbuton = tk.Frame(self.frame_princ_graine_add, bg = "#e0f5a1")
+        self.frame_graine_add_labelbuton = tk.Frame(self.frame_princ_graine_add, bg = vert_claire)
         self.frame_graine_add_labelbuton.grid(rows = 1, sticky = "we")
 
-        self.frame_graine_add_entries = tk.Frame(self.frame_princ_graine_add, bg = "#e0f5a1")
+        self.frame_graine_add_entries = tk.Frame(self.frame_princ_graine_add, bg = vert_claire)
         self.frame_graine_add_entries.grid(rows = 2, sticky = "we")
 
-        self.frame_graine_add_obs = tk.Frame(self.frame_princ_graine_add, bg = "#e0f5a1")
+        self.frame_graine_add_obs = tk.Frame(self.frame_princ_graine_add, bg = vert_claire)
         self.frame_graine_add_obs.grid(rows = 3, sticky = "we")
 
-        self.label_add = tk.Label(self.frame_graine_add_labelbuton, text = "Ajouter une graine", bg = "#e0f5a1", fg = "#305206", font = ("Oswald", 30))
+        self.label_add = tk.Label(self.frame_graine_add_labelbuton, text = "Ajouter une graine", bg = vert_claire, fg = vert_foncé, font = ("Oswald", 30))
         self.label_add.pack(side = LEFT, anchor = "w")
         
-        self.bouton_graine_add_retour = tk.Button(self.frame_graine_add_labelbuton, text = "Retour", font = ("Montserrat", 14), bg = "#ffc582", fg = "#444444", relief = FLAT, command = lambda: retour())
+        self.bouton_graine_add_retour = tk.Button(self.frame_graine_add_labelbuton, text = "Retour", font = ("Montserrat", 14), bg = orange_claire, fg = noir, relief = FLAT, command = lambda: retour())
         self.bouton_graine_add_retour.pack(side = RIGHT, anchor = "e")
         
         def retour():
@@ -254,14 +257,14 @@ class Interface(tk.Tk):
             else:
                 self.frame_graineshist_actif()
                 
-        tk.Label(self.frame_graine_add_entries, text = "Nom", bg = "#e0f5a1", fg = "#444444", font = (None, 14), padx = 10, pady = 40).grid(row = 1, column = 2)
-        tk.Label(self.frame_graine_add_entries, text = "Couleur", bg = "#e0f5a1", fg = "#444444", font = (None, 14), padx = 10, pady = 40).grid(row = 1, column = 4)
-        tk.Label(self.frame_graine_add_entries, text = "Quantité", bg = "#e0f5a1", fg = "#444444", font = (None, 14), padx = 10, pady = 40).grid(row = 1, column = 6)
-        tk.Label(self.frame_graine_add_entries, text = "Catégorie", bg = "#e0f5a1", fg = "#444444", font = (None, 14), padx = 10, pady = 40).grid(row = 3, column = 1)
-        tk.Label(self.frame_graine_add_entries, text = "Descendance", bg = "#e0f5a1", fg = "#444444", font = (None, 14), padx = 10, pady = 40).grid(row = 3, column = 3)
-        tk.Label(self.frame_graine_add_entries, text = "Année de récolte", bg = "#e0f5a1", fg = "#444444", font = (None, 14), padx = 10, pady = 40).grid(row = 3, column = 5)
-        tk.Label(self.frame_graine_add_entries, text = "Mois de plantation", bg = "#e0f5a1", fg = "#444444", font = (None, 14), padx = 10, pady = 40).grid(row = 3, column = 7)
-        tk.Label(self.frame_graine_add_entries, text = "Observation", bg = "#e0f5a1", fg = "#444444", font = (None, 14), padx = 10, pady = 40).grid(row = 5, column = 4)
+        tk.Label(self.frame_graine_add_entries, text = "Nom", bg = vert_claire, fg = noir, font = (None, 14), padx = 10, pady = 40).grid(row = 1, column = 2)
+        tk.Label(self.frame_graine_add_entries, text = "Couleur", bg = vert_claire, fg = noir, font = (None, 14), padx = 10, pady = 40).grid(row = 1, column = 4)
+        tk.Label(self.frame_graine_add_entries, text = "Quantité", bg = vert_claire, fg = noir, font = (None, 14), padx = 10, pady = 40).grid(row = 1, column = 6)
+        tk.Label(self.frame_graine_add_entries, text = "Catégorie", bg = vert_claire, fg = noir, font = (None, 14), padx = 10, pady = 40).grid(row = 3, column = 1)
+        tk.Label(self.frame_graine_add_entries, text = "Descendance", bg = vert_claire, fg = noir, font = (None, 14), padx = 10, pady = 40).grid(row = 3, column = 3)
+        tk.Label(self.frame_graine_add_entries, text = "Année de récolte", bg = vert_claire, fg = noir, font = (None, 14), padx = 10, pady = 40).grid(row = 3, column = 5)
+        tk.Label(self.frame_graine_add_entries, text = "Mois de plantation", bg = vert_claire, fg = noir, font = (None, 14), padx = 10, pady = 40).grid(row = 3, column = 7)
+        tk.Label(self.frame_graine_add_entries, text = "Observation", bg = vert_claire, fg = noir, font = (None, 14), padx = 10, pady = 40).grid(row = 5, column = 4)
 
         self.name_entry = tk.Entry(self.frame_graine_add_entries)
         self.name_entry.grid(row = 2, column = 2)
@@ -282,7 +285,7 @@ class Interface(tk.Tk):
         self.cate_box.set("Choisir catégorie")
         self.cate_box.grid(row = 4, column = 1)
 
-        self.bouton_graine_add_save = tk.Button(self.frame_graine_add_obs, text = "Sauvegarder la\nnouvelle graine", font = ("Montserrat", 14), bg = "#eb7c21", fg = "#444444", relief = FLAT, command = lambda: message_sauvegarde()) 
+        self.bouton_graine_add_save = tk.Button(self.frame_graine_add_obs, text = "Sauvegarder la\nnouvelle graine", font = ("Montserrat", 14), bg = orange, fg = noir, relief = FLAT, command = lambda: message_sauvegarde()) 
         self.bouton_graine_add_save.pack()       
 
         def message_sauvegarde():            
@@ -318,21 +321,21 @@ class Interface(tk.Tk):
         
         self.INIT()
 
-        self.frame_princ_graine_modif = tk.Frame(self, bg = "#e0f5a1")
+        self.frame_princ_graine_modif = tk.Frame(self, bg = vert_claire)
         self.frame_princ_graine_modif.grid()
 
-        self.frame_graine_modif_labelbuton = tk.Frame(self.frame_princ_graine_modif, bg = "#e0f5a1")
+        self.frame_graine_modif_labelbuton = tk.Frame(self.frame_princ_graine_modif, bg = vert_claire)
         self.frame_graine_modif_labelbuton.grid(rows = 1, sticky = "we")
 
-        self.frame_graine_modif_entries = tk.Frame(self.frame_princ_graine_modif, bg = "#e0f5a1")
+        self.frame_graine_modif_entries = tk.Frame(self.frame_princ_graine_modif, bg = vert_claire)
         self.frame_graine_modif_entries.grid(rows = 2, sticky = "we")
 
-        self.frame_graine_modif_obs = tk.Frame(self.frame_princ_graine_modif, bg = "#e0f5a1")
+        self.frame_graine_modif_obs = tk.Frame(self.frame_princ_graine_modif, bg = vert_claire)
         self.frame_graine_modif_obs.grid(rows = 3, sticky = "we")
 
-        tk.Label(self.frame_graine_modif_labelbuton, text = ("Modifier la graine : "+ seed[1]), bg = "#e0f5a1", fg = "#305206", font = ("Oswald", 30)).pack(side = LEFT, anchor = "w")
+        tk.Label(self.frame_graine_modif_labelbuton, text = ("Modifier la graine : "+ seed[1]), bg = vert_claire, fg = vert_foncé, font = ("Oswald", 30)).pack(side = LEFT, anchor = "w")
         
-        self.bouton_graine_modif_retour = tk.Button(self.frame_graine_modif_labelbuton, text = "Retour", font = ("Montserrat", 14), bg = "#ffc582", fg = "#444444", relief = FLAT, command = lambda: retour())
+        self.bouton_graine_modif_retour = tk.Button(self.frame_graine_modif_labelbuton, text = "Retour", font = ("Montserrat", 14), bg = orange_claire, fg = noir, relief = FLAT, command = lambda: retour())
         self.bouton_graine_modif_retour.pack(side = RIGHT, ipadx = 20)
         
         def retour():
@@ -349,14 +352,14 @@ class Interface(tk.Tk):
                         if l[i][1] == a:
                             return i
 
-        tk.Label(self.frame_graine_modif_entries, text = "Nom", bg = "#e0f5a1", fg = "#444444", font = (None, 14), padx = 10, pady = 40).grid(row = 1, column = 2)
-        tk.Label(self.frame_graine_modif_entries, text = "Couleur", bg = "#e0f5a1", fg = "#444444", font = (None, 14), padx = 10, pady = 40).grid(row = 1, column = 4)
-        tk.Label(self.frame_graine_modif_entries, text = "Quantité", bg = "#e0f5a1", fg = "#444444", font = (None, 14), padx = 10, pady = 40).grid(row = 1, column = 6)
-        tk.Label(self.frame_graine_modif_entries, text = "Catégorie", bg = "#e0f5a1", fg = "#444444", font = (None, 14), padx = 10, pady = 40).grid(row = 3, column = 1)
-        tk.Label(self.frame_graine_modif_entries, text = "Descendance", bg = "#e0f5a1", fg = "#444444", font = (None, 14), padx = 10, pady = 40).grid(row = 3, column = 3)
-        tk.Label(self.frame_graine_modif_entries, text = "Année de récolte", bg = "#e0f5a1", fg = "#444444", font = (None, 14), padx = 10, pady = 40).grid(row = 3, column = 5)
-        tk.Label(self.frame_graine_modif_entries, text = "Mois de plantation", bg = "#e0f5a1", fg = "#444444", font = (None, 14), padx = 10, pady = 40).grid(row = 3, column = 7)
-        tk.Label(self.frame_graine_modif_entries, text = "Observation", bg = "#e0f5a1", fg = "#444444", font = (None, 14), padx = 10, pady = 40).grid(row = 5, column = 4)
+        tk.Label(self.frame_graine_modif_entries, text = "Nom", bg = vert_claire, fg = noir, font = (None, 14), padx = 10, pady = 40).grid(row = 1, column = 2)
+        tk.Label(self.frame_graine_modif_entries, text = "Couleur", bg = vert_claire, fg = noir, font = (None, 14), padx = 10, pady = 40).grid(row = 1, column = 4)
+        tk.Label(self.frame_graine_modif_entries, text = "Quantité", bg = vert_claire, fg = noir, font = (None, 14), padx = 10, pady = 40).grid(row = 1, column = 6)
+        tk.Label(self.frame_graine_modif_entries, text = "Catégorie", bg = vert_claire, fg = noir, font = (None, 14), padx = 10, pady = 40).grid(row = 3, column = 1)
+        tk.Label(self.frame_graine_modif_entries, text = "Descendance", bg = vert_claire, fg = noir, font = (None, 14), padx = 10, pady = 40).grid(row = 3, column = 3)
+        tk.Label(self.frame_graine_modif_entries, text = "Année de récolte", bg = vert_claire, fg = noir, font = (None, 14), padx = 10, pady = 40).grid(row = 3, column = 5)
+        tk.Label(self.frame_graine_modif_entries, text = "Mois de plantation", bg = vert_claire, fg = noir, font = (None, 14), padx = 10, pady = 40).grid(row = 3, column = 7)
+        tk.Label(self.frame_graine_modif_entries, text = "Observation", bg = vert_claire, fg = noir, font = (None, 14), padx = 10, pady = 40).grid(row = 5, column = 4)
 
         self.name_entry = tk.Entry(self.frame_graine_modif_entries)
         self.name_entry.grid(row = 2, column = 2)
@@ -385,7 +388,7 @@ class Interface(tk.Tk):
         self.cate_box.grid(row = 4, column = 1)
         self.cate_box.current(findi(get_category(), seed[4]))
 
-        self.bouton_graine_modif_save = tk.Button(self.frame_graine_modif_obs, text = "Sauvegarder la\nnouvelle graine", font = ("Montserrat", 14), bg = "#eb7c21", fg = "#444444", relief = FLAT, command = lambda: message_sauvegarde()) 
+        self.bouton_graine_modif_save = tk.Button(self.frame_graine_modif_obs, text = "Sauvegarder la\nnouvelle graine", font = ("Montserrat", 14), bg = orange, fg = noir, relief = FLAT, command = lambda: message_sauvegarde()) 
         self.bouton_graine_modif_save.pack()        
 
         def message_sauvegarde():
@@ -415,56 +418,56 @@ class Interface(tk.Tk):
 
         self.INIT()
 
-        self.frame_fiche_graine_fond = tk.Frame(self, bg = "#e0f5a1")    
+        self.frame_fiche_graine_fond = tk.Frame(self, bg = vert_claire)    
         self.frame_fiche_graine_fond.grid()
 
-        self.frame_fiche_graine_fond_1 = tk.Frame(self.frame_fiche_graine_fond, bg = "#e0f5a1")    
+        self.frame_fiche_graine_fond_1 = tk.Frame(self.frame_fiche_graine_fond, bg = vert_claire)    
         self.frame_fiche_graine_fond_1.grid(row = 1, sticky = "we")
 
-        self.frame_fiche_graine_photo = tk.Frame(self.frame_fiche_graine_fond_1, bg = "#e0f5a1")
+        self.frame_fiche_graine_photo = tk.Frame(self.frame_fiche_graine_fond_1, bg = vert_claire)
         self.frame_fiche_graine_photo.grid(row = 1, column = 1)
 
-        self.frame_fiche_graine_nc = tk.Frame(self.frame_fiche_graine_fond_1, bg = "#e0f5a1")
+        self.frame_fiche_graine_nc = tk.Frame(self.frame_fiche_graine_fond_1, bg = vert_claire)
         self.frame_fiche_graine_nc.grid(row = 1, column = 2)
 
-        self.frame_fiche_graine_vals_g = tk.Frame(self.frame_fiche_graine_fond_1, bg = "#e0f5a1")
+        self.frame_fiche_graine_vals_g = tk.Frame(self.frame_fiche_graine_fond_1, bg = vert_claire)
         self.frame_fiche_graine_vals_g.grid(row = 2, column = 1)
 
-        self.frame_fiche_graine_vals_d = tk.Frame(self.frame_fiche_graine_fond_1, bg = "#e0f5a1")
+        self.frame_fiche_graine_vals_d = tk.Frame(self.frame_fiche_graine_fond_1, bg = vert_claire)
         self.frame_fiche_graine_vals_d.grid(row = 2, column = 2)
         
-        self.frame_fiche_graine_fond_obs = tk.Frame(self.frame_fiche_graine_fond, bg = "#e0f5a1")    
+        self.frame_fiche_graine_fond_obs = tk.Frame(self.frame_fiche_graine_fond, bg = vert_claire)    
         self.frame_fiche_graine_fond_obs.grid(row = 2, sticky = "we")
 
-        tk.Label(self.frame_fiche_graine_fond, text = "Fiche de graine", bg = "#e0f5a1", fg = "#305206", font = (None, 30)).grid(row = 0)
+        tk.Label(self.frame_fiche_graine_fond, text = "Fiche de graine", bg = vert_claire, fg = vert_foncé, font = (None, 30)).grid(row = 0)
         
-        self.bouton_graine_fiche_retour = tk.Button(self.frame_fiche_graine_fond, text = "Retour", font = ("Montserrat", 14), bg = "#ffc582", fg = "#444444", relief = FLAT, command = lambda: self.frame_graineshist_actif())
+        self.bouton_graine_fiche_retour = tk.Button(self.frame_fiche_graine_fond, text = "Retour", font = ("Montserrat", 14), bg = orange_claire, fg = noir, relief = FLAT, command = lambda: self.frame_graineshist_actif())
         self.bouton_graine_fiche_retour.grid(row = 0, column = 1, sticky = "e")
  
-        can_photo = tk.Canvas(self.frame_fiche_graine_photo, width = 500, height = 320, bg = "#e0f5a1", highlightthickness = 0)
+        can_photo = tk.Canvas(self.frame_fiche_graine_photo, width = 500, height = 320, bg = vert_claire, highlightthickness = 0)
         imagegraine = PhotoImage(file = "default_pic.gif")
         can_photo.create_image(250, 150, image = imagegraine)
         can_photo.image = imagegraine
         can_photo.pack(expand = YES, fill = BOTH)
 
-        tk.Label(self.frame_fiche_graine_nc, text = "Nom:", bg = "#e0f5a1", fg = "#444444", font = (None, 30)).grid(row = 1, sticky = "w")
-        tk.Label(self.frame_fiche_graine_nc, text = seed[1], bg = "#e0f5a1", fg = "#305206", font = (None, 28), ).grid(row = 2, sticky = "w", ipady = 10)
-        tk.Label(self.frame_fiche_graine_nc, text = "Couleur:", bg = "#e0f5a1", fg = "#444444", font = (None, 30)).grid(row = 3, sticky = "w")
-        tk.Label(self.frame_fiche_graine_nc, text = seed[2], bg = "#e0f5a1", fg = "#305206", font = (None, 28)).grid(row = 4, sticky = "w")
+        tk.Label(self.frame_fiche_graine_nc, text = "Nom:", bg = vert_claire, fg = noir, font = (None, 30)).grid(row = 1, sticky = "w")
+        tk.Label(self.frame_fiche_graine_nc, text = seed[1], bg = vert_claire, fg = vert_foncé, font = (None, 28), ).grid(row = 2, sticky = "w", ipady = 10)
+        tk.Label(self.frame_fiche_graine_nc, text = "Couleur:", bg = vert_claire, fg = noir, font = (None, 30)).grid(row = 3, sticky = "w")
+        tk.Label(self.frame_fiche_graine_nc, text = seed[2], bg = vert_claire, fg = vert_foncé, font = (None, 28)).grid(row = 4, sticky = "w")
 
-        tk.Label(self.frame_fiche_graine_vals_d, text = "Quantité:", bg = "#e0f5a1", fg = "#444444", font = (None, 22)).grid(row = 1, sticky = "w")
-        tk.Label(self.frame_fiche_graine_vals_d, text = seed[3], bg = "#e0f5a1", fg = "#305206", font = (None, 20)).grid(row = 2, sticky = "w", ipady = 10)
-        tk.Label(self.frame_fiche_graine_vals_d, text = "Année de récolte:", bg = "#e0f5a1", fg = "#444444", font = (None, 22)).grid(row = 3, sticky = "w")
-        tk.Label(self.frame_fiche_graine_vals_d, text = seed[6], bg = "#e0f5a1", fg = "#305206", font = (None, 20)).grid(row = 4, sticky = "w", ipady = 10)
-        tk.Label(self.frame_fiche_graine_vals_d, text = "Descendance:", bg = "#e0f5a1", fg = "#444444", font = (None, 22)).grid(row = 5, sticky = "w")
-        tk.Label(self.frame_fiche_graine_vals_d, text = seed[5], bg = "#e0f5a1", fg = "#305206", font = (None, 20)).grid(row = 6, sticky = "w")
+        tk.Label(self.frame_fiche_graine_vals_d, text = "Quantité:", bg = vert_claire, fg = noir, font = (None, 22)).grid(row = 1, sticky = "w")
+        tk.Label(self.frame_fiche_graine_vals_d, text = seed[3], bg = vert_claire, fg = vert_foncé, font = (None, 20)).grid(row = 2, sticky = "w", ipady = 10)
+        tk.Label(self.frame_fiche_graine_vals_d, text = "Année de récolte:", bg = vert_claire, fg = noir, font = (None, 22)).grid(row = 3, sticky = "w")
+        tk.Label(self.frame_fiche_graine_vals_d, text = seed[6], bg = vert_claire, fg = vert_foncé, font = (None, 20)).grid(row = 4, sticky = "w", ipady = 10)
+        tk.Label(self.frame_fiche_graine_vals_d, text = "Descendance:", bg = vert_claire, fg = noir, font = (None, 22)).grid(row = 5, sticky = "w")
+        tk.Label(self.frame_fiche_graine_vals_d, text = seed[5], bg = vert_claire, fg = vert_foncé, font = (None, 20)).grid(row = 6, sticky = "w")
 
-        tk.Label(self.frame_fiche_graine_vals_g, text = "Catégorie:", bg = "#e0f5a1", fg = "#444444", font = (None, 22)).grid(row = 1, sticky = "w")
-        tk.Label(self.frame_fiche_graine_vals_g, text = seed[4], bg = "#e0f5a1", fg = "#305206", font = (None, 20)).grid(row = 2, sticky = "w", ipady = 10)
-        tk.Label(self.frame_fiche_graine_vals_g, text = "Mois de plantation:", bg = "#e0f5a1", fg = "#444444", font = (None, 22)).grid(row = 3, sticky = "w")
-        tk.Label(self.frame_fiche_graine_vals_g, text = seed[7], bg = "#e0f5a1", fg = "#305206", font = (None, 20)).grid(row = 4, sticky = "w")
+        tk.Label(self.frame_fiche_graine_vals_g, text = "Catégorie:", bg = vert_claire, fg = noir, font = (None, 22)).grid(row = 1, sticky = "w")
+        tk.Label(self.frame_fiche_graine_vals_g, text = seed[4], bg = vert_claire, fg = vert_foncé, font = (None, 20)).grid(row = 2, sticky = "w", ipady = 10)
+        tk.Label(self.frame_fiche_graine_vals_g, text = "Mois de plantation:", bg = vert_claire, fg = noir, font = (None, 22)).grid(row = 3, sticky = "w")
+        tk.Label(self.frame_fiche_graine_vals_g, text = seed[7], bg = vert_claire, fg = vert_foncé, font = (None, 20)).grid(row = 4, sticky = "w")
 
-        tk.Label(self.frame_fiche_graine_fond_obs, text = "Observation:", bg = "#e0f5a1", fg = "#444444", font = (None, 22)).pack(side = TOP, ipady = 15)
+        tk.Label(self.frame_fiche_graine_fond_obs, text = "Observation:", bg = vert_claire, fg = noir, font = (None, 22)).pack(side = TOP, ipady = 15)
         self.obs_display = tk.Text(self.frame_fiche_graine_fond_obs, width = 100, height = 10)
         self.obs_display.insert(tk.END, seed[8])
         self.obs_display.pack(side = BOTTOM)
@@ -480,19 +483,19 @@ class Interface(tk.Tk):
         
         self.INIT()
 
-        self.frame_his_mem_fond = tk.Frame(self, bg = "#e0f5a1")
+        self.frame_his_mem_fond = tk.Frame(self, bg = vert_claire)
         self.frame_his_mem_fond.grid(sticky = "nw")
 
-        self.frame_his_mem_heading = tk.Frame(self.frame_his_mem_fond, bg = "#e0f5a1")
+        self.frame_his_mem_heading = tk.Frame(self.frame_his_mem_fond, bg = vert_claire)
         self.frame_his_mem_heading.grid(row = 1, sticky = "nw")
 
-        self.frame_his_mem_table = tk.Frame(self.frame_his_mem_fond, bg = "#eb7c21", borderwidth = 2)
+        self.frame_his_mem_table = tk.Frame(self.frame_his_mem_fond, bg = orange, borderwidth = 2)
         self.frame_his_mem_table.grid(row = 2, pady = 20, padx = 35)
         
-        self.frame_his_mem_buttons = tk.Frame(self.frame_his_mem_fond, bg = "#e0f5a1")
+        self.frame_his_mem_buttons = tk.Frame(self.frame_his_mem_fond, bg = vert_claire)
         self.frame_his_mem_buttons.grid(row = 3, sticky = "we")
         
-        self.label = tk.Label(self.frame_his_mem_heading, text = "Liste de tous les membres", bg = "#e0f5a1", fg = "#305206", font = ("Oswald", 30))
+        self.label = tk.Label(self.frame_his_mem_heading, text = "Liste de tous les membres", bg = vert_claire, fg = vert_foncé, font = ("Oswald", 30))
         self.label.pack()
         
         table_mem = ttk.Treeview(self.frame_his_mem_table, columns = (1, 2, 3, 4, 5, 6, 7, 8), show = 'headings', height = 30)
@@ -525,22 +528,22 @@ class Interface(tk.Tk):
         for i in range(len(get_member())):
             table_mem.insert(parent = '', index = i, iid = i, values = (get_member()[i]))
 
-        self.bouton_fiche_mem = tk.Button(self.frame_his_mem_buttons, text = "Aller\nà la fiche\ndu membre", font = ("Montserrat", 14), bg = "#eb7c21", fg = "#e0f5a1", relief = FLAT, command = lambda: select_membre())
+        self.bouton_fiche_mem = tk.Button(self.frame_his_mem_buttons, text = "Aller\nà la fiche\ndu membre", font = ("Montserrat", 14), bg = orange, fg = vert_claire, relief = FLAT, command = lambda: select_membre())
         self.bouton_fiche_mem.pack(side = LEFT)
 
-        self.bouton_ajouter_mem = tk.Button(self.frame_his_mem_buttons, text = "Ajouter\nle membre\n", font = ("Montserrat", 14), bg = "#e0f5a1", fg = "#444444", relief = FLAT, command = lambda: self.frame_add_mem_actif())
+        self.bouton_ajouter_mem = tk.Button(self.frame_his_mem_buttons, text = "Ajouter\nle membre\n", font = ("Montserrat", 14), bg = vert_claire, fg = noir, relief = FLAT, command = lambda: self.frame_add_mem_actif())
         self.bouton_ajouter_mem.pack(side = LEFT)
 
-        self.bouton_modif_mem = tk.Button(self.frame_his_mem_buttons, text = "Modifier\nle membre\n", font = ("Montserrat", 14), bg = "#e0f5a1", fg = "#444444", relief = FLAT, command = lambda: get_item())
+        self.bouton_modif_mem = tk.Button(self.frame_his_mem_buttons, text = "Modifier\nle membre\n", font = ("Montserrat", 14), bg = vert_claire, fg = noir, relief = FLAT, command = lambda: get_item())
         self.bouton_modif_mem.pack(side = LEFT)
 
-        self.bouton_supr_mem = tk.Button(self.frame_his_mem_buttons, text = "Suprimer\nle membre\n", font = ("Montserrat", 14), bg = "#e0f5a1", fg = "#444444", relief = FLAT, command = lambda: suppr_mem())
+        self.bouton_supr_mem = tk.Button(self.frame_his_mem_buttons, text = "Suprimer\nle membre\n", font = ("Montserrat", 14), bg = vert_claire, fg = noir, relief = FLAT, command = lambda: suppr_mem())
         self.bouton_supr_mem.pack(side = LEFT)
 
-        self.bouton_undo_mem = tk.Button(self.frame_his_mem_buttons, text = "Annuler\naction\n(wip)", font = ("Montserrat", 14), bg = "#e0f5a1", fg = "#444444", relief = FLAT, command = lambda: annuler_action())
+        self.bouton_undo_mem = tk.Button(self.frame_his_mem_buttons, text = "Annuler\naction\n(wip)", font = ("Montserrat", 14), bg = vert_claire, fg = noir, relief = FLAT, command = lambda: annuler_action())
         self.bouton_undo_mem.pack(side = LEFT)
 
-        self.bouton_acceuil = tk.Button(self.frame_his_mem_buttons, text = "Revenir\nau\nmenu", font = ("Montserrat", 14), bg = "#e0f5a1", fg = "#444444", relief = FLAT, command = lambda: self.frame_acceuil_actif())
+        self.bouton_acceuil = tk.Button(self.frame_his_mem_buttons, text = "Revenir\nau\nmenu", font = ("Montserrat", 14), bg = vert_claire, fg = noir, relief = FLAT, command = lambda: self.frame_acceuil_actif())
         self.bouton_acceuil.pack(side = LEFT)
         
         def select_membre():
@@ -589,19 +592,19 @@ class Interface(tk.Tk):
 
         self.INIT()
 
-        self.frame_princ_mem_add = tk.Frame(self, bg = "#e0f5a1")
+        self.frame_princ_mem_add = tk.Frame(self, bg = vert_claire)
         self.frame_princ_mem_add.grid(sticky = "we")
 
-        self.frame_mem_add_labelbuton = tk.Frame(self.frame_princ_mem_add, bg = "#e0f5a1")
+        self.frame_mem_add_labelbuton = tk.Frame(self.frame_princ_mem_add, bg = vert_claire)
         self.frame_mem_add_labelbuton.grid(rows = 1, sticky = "we")
 
-        self.frame_mem_add_entries = tk.Frame(self.frame_princ_mem_add, bg = "#e0f5a1")
+        self.frame_mem_add_entries = tk.Frame(self.frame_princ_mem_add, bg = vert_claire)
         self.frame_mem_add_entries.grid(rows = 2, sticky = "we")
 
-        self.label_add = tk.Label(self.frame_mem_add_labelbuton, text = "Ajouter un membre", bg = "#e0f5a1", fg = "#305206", font = ("Oswald", 30))
+        self.label_add = tk.Label(self.frame_mem_add_labelbuton, text = "Ajouter un membre", bg = vert_claire, fg = vert_foncé, font = ("Oswald", 30))
         self.label_add.pack(side = LEFT, anchor = "w")
         
-        self.bouton_mem_add_retour = tk.Button(self.frame_mem_add_labelbuton, text = "Retour", font = ("Montserrat", 14), bg = "#ffc582", fg = "#444444", relief = FLAT, command = lambda: retour())
+        self.bouton_mem_add_retour = tk.Button(self.frame_mem_add_labelbuton, text = "Retour", font = ("Montserrat", 14), bg = orange_claire, fg = noir, relief = FLAT, command = lambda: retour())
         self.bouton_mem_add_retour.pack(side = RIGHT, anchor = "e")
         
         def retour():
@@ -612,13 +615,13 @@ class Interface(tk.Tk):
             else:
                 self.frame_membrehist_actif()
                 
-        tk.Label(self.frame_mem_add_entries, text = "Nom", bg = "#e0f5a1", fg = "#444444", font = (None, 14), padx = 10, pady = 20).grid(row = 1, column = 2)
-        tk.Label(self.frame_mem_add_entries, text = "Prénom", bg = "#e0f5a1", fg = "#444444", font = (None, 14), padx = 10, pady = 20).grid(row = 1, column = 4)
-        tk.Label(self.frame_mem_add_entries, text = "Telephone", bg = "#e0f5a1", fg = "#444444", font = (None, 14), padx = 10, pady = 20).grid(row = 3, column = 1)
-        tk.Label(self.frame_mem_add_entries, text = "Email", bg = "#e0f5a1", fg = "#444444", font = (None, 14), padx = 10, pady = 20).grid(row = 3, column = 3)
-        tk.Label(self.frame_mem_add_entries, text = "Ville", bg = "#e0f5a1", fg = "#444444", font = (None, 14), padx = 10, pady = 20).grid(row = 3, column = 5)
-        tk.Label(self.frame_mem_add_entries, text = "Donation", bg = "#e0f5a1", fg = "#444444", font = (None, 14), padx = 10, pady = 20).grid(row = 5, column = 2)
-        tk.Label(self.frame_mem_add_entries, text = "Reception", bg = "#e0f5a1", fg = "#444444", font = (None, 14), padx = 10, pady = 20).grid(row = 5, column = 4)
+        tk.Label(self.frame_mem_add_entries, text = "Nom", bg = vert_claire, fg = noir, font = (None, 14), padx = 10, pady = 20).grid(row = 1, column = 2)
+        tk.Label(self.frame_mem_add_entries, text = "Prénom", bg = vert_claire, fg = noir, font = (None, 14), padx = 10, pady = 20).grid(row = 1, column = 4)
+        tk.Label(self.frame_mem_add_entries, text = "Telephone", bg = vert_claire, fg = noir, font = (None, 14), padx = 10, pady = 20).grid(row = 3, column = 1)
+        tk.Label(self.frame_mem_add_entries, text = "Email", bg = vert_claire, fg = noir, font = (None, 14), padx = 10, pady = 20).grid(row = 3, column = 3)
+        tk.Label(self.frame_mem_add_entries, text = "Ville", bg = vert_claire, fg = noir, font = (None, 14), padx = 10, pady = 20).grid(row = 3, column = 5)
+        tk.Label(self.frame_mem_add_entries, text = "Donation", bg = vert_claire, fg = noir, font = (None, 14), padx = 10, pady = 20).grid(row = 5, column = 2)
+        tk.Label(self.frame_mem_add_entries, text = "Reception", bg = vert_claire, fg = noir, font = (None, 14), padx = 10, pady = 20).grid(row = 5, column = 4)
 
         self.name_entry = tk.Entry(self.frame_mem_add_entries)
         self.name_entry.grid(row = 2, column = 2)
@@ -635,7 +638,7 @@ class Interface(tk.Tk):
         self.rec_entry = tk.Entry(self.frame_mem_add_entries)
         self.rec_entry.grid(row = 6, column = 4)
 
-        self.bouton_mem_add_save = tk.Button(self.frame_mem_add_entries, text = "Sauvegarder le\nnouveau membre", font = ("Montserrat", 14), bg = "#eb7c21", fg = "#444444", relief = FLAT, command = lambda: message_sauvegarde()) 
+        self.bouton_mem_add_save = tk.Button(self.frame_mem_add_entries, text = "Sauvegarder le\nnouveau membre", font = ("Montserrat", 14), bg = orange, fg = noir, relief = FLAT, command = lambda: message_sauvegarde()) 
         self.bouton_mem_add_save.grid(row = 7, column = 3, pady = 10)       
 
         def message_sauvegarde():            
@@ -682,18 +685,18 @@ class Interface(tk.Tk):
         
         self.INIT()
 
-        self.frame_princ_mem_modif = tk.Frame(self, bg = "#e0f5a1")
+        self.frame_princ_mem_modif = tk.Frame(self, bg = vert_claire)
         self.frame_princ_mem_modif.grid()
 
-        self.frame_mem_modif_labelbuton = tk.Frame(self.frame_princ_mem_modif, bg = "#e0f5a1")
+        self.frame_mem_modif_labelbuton = tk.Frame(self.frame_princ_mem_modif, bg = vert_claire)
         self.frame_mem_modif_labelbuton.grid(rows = 1, sticky = "we")
 
-        self.frame_mem_modif_entries = tk.Frame(self.frame_princ_mem_modif, bg = "#e0f5a1")
+        self.frame_mem_modif_entries = tk.Frame(self.frame_princ_mem_modif, bg = vert_claire)
         self.frame_mem_modif_entries.grid(rows = 2, sticky = "we")
 
-        tk.Label(self.frame_mem_modif_labelbuton, text = ("Modifier le membre : "+ mem[1]), bg = "#e0f5a1", fg = "#305206", font = ("Oswald", 30)).pack(side = LEFT, anchor = "w")
+        tk.Label(self.frame_mem_modif_labelbuton, text = ("Modifier le membre : "+ mem[1]), bg = vert_claire, fg = vert_foncé, font = ("Oswald", 30)).pack(side = LEFT, anchor = "w")
         
-        self.bouton_mem_modif_retour = tk.Button(self.frame_mem_modif_labelbuton, text = "Retour", font = ("Montserrat", 14), bg = "#ffc582", fg = "#444444", relief = FLAT, command = lambda: retour())
+        self.bouton_mem_modif_retour = tk.Button(self.frame_mem_modif_labelbuton, text = "Retour", font = ("Montserrat", 14), bg = orange_claire, fg = noir, relief = FLAT, command = lambda: retour())
         self.bouton_mem_modif_retour.pack(side = RIGHT, ipadx = 20)
         
         def retour():
@@ -704,13 +707,13 @@ class Interface(tk.Tk):
             else:
                 self.frame_membrehist_actif()
 
-        tk.Label(self.frame_mem_modif_entries, text = "Nom", bg = "#e0f5a1", fg = "#444444", font = (None, 14), padx = 10, pady = 20).grid(row = 1, column = 2)
-        tk.Label(self.frame_mem_modif_entries, text = "Prénom", bg = "#e0f5a1", fg = "#444444", font = (None, 14), padx = 10, pady = 20).grid(row = 1, column = 4)
-        tk.Label(self.frame_mem_modif_entries, text = "Telephone", bg = "#e0f5a1", fg = "#444444", font = (None, 14), padx = 10, pady = 20).grid(row = 3, column = 1)
-        tk.Label(self.frame_mem_modif_entries, text = "Email", bg = "#e0f5a1", fg = "#444444", font = (None, 14), padx = 10, pady = 20).grid(row = 3, column = 3)
-        tk.Label(self.frame_mem_modif_entries, text = "Ville", bg = "#e0f5a1", fg = "#444444", font = (None, 14), padx = 10, pady = 20).grid(row = 3, column = 5)
-        tk.Label(self.frame_mem_modif_entries, text = "Donation", bg = "#e0f5a1", fg = "#444444", font = (None, 14), padx = 10, pady = 20).grid(row = 5, column = 2)
-        tk.Label(self.frame_mem_modif_entries, text = "Reception", bg = "#e0f5a1", fg = "#444444", font = (None, 14), padx = 10, pady = 20).grid(row = 5, column = 4)
+        tk.Label(self.frame_mem_modif_entries, text = "Nom", bg = vert_claire, fg = noir, font = (None, 14), padx = 10, pady = 20).grid(row = 1, column = 2)
+        tk.Label(self.frame_mem_modif_entries, text = "Prénom", bg = vert_claire, fg = noir, font = (None, 14), padx = 10, pady = 20).grid(row = 1, column = 4)
+        tk.Label(self.frame_mem_modif_entries, text = "Telephone", bg = vert_claire, fg = noir, font = (None, 14), padx = 10, pady = 20).grid(row = 3, column = 1)
+        tk.Label(self.frame_mem_modif_entries, text = "Email", bg = vert_claire, fg = noir, font = (None, 14), padx = 10, pady = 20).grid(row = 3, column = 3)
+        tk.Label(self.frame_mem_modif_entries, text = "Ville", bg = vert_claire, fg = noir, font = (None, 14), padx = 10, pady = 20).grid(row = 3, column = 5)
+        tk.Label(self.frame_mem_modif_entries, text = "Donation", bg = vert_claire, fg = noir, font = (None, 14), padx = 10, pady = 20).grid(row = 5, column = 2)
+        tk.Label(self.frame_mem_modif_entries, text = "Reception", bg = vert_claire, fg = noir, font = (None, 14), padx = 10, pady = 20).grid(row = 5, column = 4)
 
         self.name_entry = tk.Entry(self.frame_mem_modif_entries)
         self.name_entry.grid(row = 2, column = 2)
@@ -734,7 +737,7 @@ class Interface(tk.Tk):
         self.rec_entry.grid(row = 6, column = 4) 
         self.rec_entry.insert(0, str(mem[7]))
 
-        self.bouton_mem_modif_save = tk.Button(self.frame_mem_modif_entries, text = "Sauvegarder le\nnouveau membre", font = ("Montserrat", 14), bg = "#eb7c21", fg = "#444444", relief = FLAT, command = lambda: message_sauvegarde()) 
+        self.bouton_mem_modif_save = tk.Button(self.frame_mem_modif_entries, text = "Sauvegarder le\nnouveau membre", font = ("Montserrat", 14), bg = orange, fg = noir, relief = FLAT, command = lambda: message_sauvegarde()) 
         self.bouton_mem_modif_save.grid(row = 7, column = 3)        
 
         def message_sauvegarde():
@@ -765,51 +768,51 @@ class Interface(tk.Tk):
 
         self.INIT()
 
-        self.frame_fiche_membre_fond = tk.Frame(self, bg = "#e0f5a1")    
+        self.frame_fiche_membre_fond = tk.Frame(self, bg = vert_claire)    
         self.frame_fiche_membre_fond.grid()
 
-        self.frame_fiche_membre_fond_1 = tk.Frame(self.frame_fiche_membre_fond, bg = "#e0f5a1")    
+        self.frame_fiche_membre_fond_1 = tk.Frame(self.frame_fiche_membre_fond, bg = vert_claire)    
         self.frame_fiche_membre_fond_1.grid(row = 1, sticky = "we")
 
-        self.frame_fiche_membre_photo = tk.Frame(self.frame_fiche_membre_fond_1, bg = "#e0f5a1")
+        self.frame_fiche_membre_photo = tk.Frame(self.frame_fiche_membre_fond_1, bg = vert_claire)
         self.frame_fiche_membre_photo.grid(row = 1, column = 1)
 
-        self.frame_fiche_membre_np = tk.Frame(self.frame_fiche_membre_fond_1, bg = "#e0f5a1")
+        self.frame_fiche_membre_np = tk.Frame(self.frame_fiche_membre_fond_1, bg = vert_claire)
         self.frame_fiche_membre_np.grid(row = 1, column = 2)
 
-        self.frame_fiche_membre_vals_g = tk.Frame(self.frame_fiche_membre_fond_1, bg = "#e0f5a1")
+        self.frame_fiche_membre_vals_g = tk.Frame(self.frame_fiche_membre_fond_1, bg = vert_claire)
         self.frame_fiche_membre_vals_g.grid(row = 2, column = 1)
 
-        self.frame_fiche_membre_vals_d = tk.Frame(self.frame_fiche_membre_fond_1, bg = "#e0f5a1")
+        self.frame_fiche_membre_vals_d = tk.Frame(self.frame_fiche_membre_fond_1, bg = vert_claire)
         self.frame_fiche_membre_vals_d.grid(row = 2, column = 2)
         
-        tk.Label(self.frame_fiche_membre_fond, text = "Fiche de graine", bg = "#e0f5a1", fg = "#305206", font = (None, 30)).grid(row = 0)
+        tk.Label(self.frame_fiche_membre_fond, text = "Fiche de graine", bg = vert_claire, fg = vert_foncé, font = (None, 30)).grid(row = 0)
         
-        self.bouton_membre_fiche_retour = tk.Button(self.frame_fiche_membre_fond, text = "Retour", font = ("Montserrat", 14), bg = "#ffc582", fg = "#444444", relief = FLAT, command = lambda: self.frame_membrehist_actif())
+        self.bouton_membre_fiche_retour = tk.Button(self.frame_fiche_membre_fond, text = "Retour", font = ("Montserrat", 14), bg = orange_claire, fg = noir, relief = FLAT, command = lambda: self.frame_membrehist_actif())
         self.bouton_membre_fiche_retour.grid(row = 0, column = 1, sticky = "e")
  
-        can_photo = tk.Canvas(self.frame_fiche_membre_photo, width = 500, height = 320, bg = "#e0f5a1", highlightthickness = 0)
+        can_photo = tk.Canvas(self.frame_fiche_membre_photo, width = 500, height = 320, bg = vert_claire, highlightthickness = 0)
         imagemembre = PhotoImage(file = "default_pic.gif")
         can_photo.create_image(250, 150, image = imagemembre)
         can_photo.image = imagemembre
         can_photo.pack(expand = YES, fill = BOTH)
 
-        tk.Label(self.frame_fiche_membre_np, text = "Nom:", bg = "#e0f5a1", fg = "#444444", font = (None, 30)).grid(row = 1, sticky = "w")
-        tk.Label(self.frame_fiche_membre_np, text = mem[1], bg = "#e0f5a1", fg = "#305206", font = (None, 28), ).grid(row = 2, sticky = "w", ipady = 10)
-        tk.Label(self.frame_fiche_membre_np, text = "Prénom:", bg = "#e0f5a1", fg = "#444444", font = (None, 30)).grid(row = 3, sticky = "w")
-        tk.Label(self.frame_fiche_membre_np, text = mem[2], bg = "#e0f5a1", fg = "#305206", font = (None, 28)).grid(row = 4, sticky = "w")
+        tk.Label(self.frame_fiche_membre_np, text = "Nom:", bg = vert_claire, fg = noir, font = (None, 30)).grid(row = 1, sticky = "w")
+        tk.Label(self.frame_fiche_membre_np, text = mem[1], bg = vert_claire, fg = vert_foncé, font = (None, 28), ).grid(row = 2, sticky = "w", ipady = 10)
+        tk.Label(self.frame_fiche_membre_np, text = "Prénom:", bg = vert_claire, fg = noir, font = (None, 30)).grid(row = 3, sticky = "w")
+        tk.Label(self.frame_fiche_membre_np, text = mem[2], bg = vert_claire, fg = vert_foncé, font = (None, 28)).grid(row = 4, sticky = "w")
 
-        tk.Label(self.frame_fiche_membre_vals_d, text = "Téléphone:", bg = "#e0f5a1", fg = "#444444", font = (None, 22)).grid(row = 1, sticky = "w")
-        tk.Label(self.frame_fiche_membre_vals_d, text = mem[3], bg = "#e0f5a1", fg = "#305206", font = (None, 20)).grid(row = 2, sticky = "w", ipady = 10)
-        tk.Label(self.frame_fiche_membre_vals_d, text = "Ville:", bg = "#e0f5a1", fg = "#444444", font = (None, 22)).grid(row = 3, sticky = "w")
-        tk.Label(self.frame_fiche_membre_vals_d, text = mem[5], bg = "#e0f5a1", fg = "#305206", font = (None, 20)).grid(row = 4, sticky = "w", ipady = 10)
-        tk.Label(self.frame_fiche_membre_vals_d, text = "E_mail:", bg = "#e0f5a1", fg = "#444444", font = (None, 22)).grid(row = 5, sticky = "w")
-        tk.Label(self.frame_fiche_membre_vals_d, text = mem[4], bg = "#e0f5a1", fg = "#305206", font = (None, 20)).grid(row = 6, sticky = "w")
+        tk.Label(self.frame_fiche_membre_vals_d, text = "Téléphone:", bg = vert_claire, fg = noir, font = (None, 22)).grid(row = 1, sticky = "w")
+        tk.Label(self.frame_fiche_membre_vals_d, text = mem[3], bg = vert_claire, fg = vert_foncé, font = (None, 20)).grid(row = 2, sticky = "w", ipady = 10)
+        tk.Label(self.frame_fiche_membre_vals_d, text = "Ville:", bg = vert_claire, fg = noir, font = (None, 22)).grid(row = 3, sticky = "w")
+        tk.Label(self.frame_fiche_membre_vals_d, text = mem[5], bg = vert_claire, fg = vert_foncé, font = (None, 20)).grid(row = 4, sticky = "w", ipady = 10)
+        tk.Label(self.frame_fiche_membre_vals_d, text = "E_mail:", bg = vert_claire, fg = noir, font = (None, 22)).grid(row = 5, sticky = "w")
+        tk.Label(self.frame_fiche_membre_vals_d, text = mem[4], bg = vert_claire, fg = vert_foncé, font = (None, 20)).grid(row = 6, sticky = "w")
 
-        tk.Label(self.frame_fiche_membre_vals_g, text = "Dons:", bg = "#e0f5a1", fg = "#444444", font = (None, 22)).grid(row = 1, sticky = "w")
-        tk.Label(self.frame_fiche_membre_vals_g, text = mem[6], bg = "#e0f5a1", fg = "#305206", font = (None, 20)).grid(row = 2, sticky = "w", ipady = 10)
-        tk.Label(self.frame_fiche_membre_vals_g, text = "Réceptions:", bg = "#e0f5a1", fg = "#444444", font = (None, 22)).grid(row = 3, sticky = "w")
-        tk.Label(self.frame_fiche_membre_vals_g, text = mem[7], bg = "#e0f5a1", fg = "#305206", font = (None, 20)).grid(row = 4, sticky = "w")
+        tk.Label(self.frame_fiche_membre_vals_g, text = "Dons:", bg = vert_claire, fg = noir, font = (None, 22)).grid(row = 1, sticky = "w")
+        tk.Label(self.frame_fiche_membre_vals_g, text = mem[6], bg = vert_claire, fg = vert_foncé, font = (None, 20)).grid(row = 2, sticky = "w", ipady = 10)
+        tk.Label(self.frame_fiche_membre_vals_g, text = "Réceptions:", bg = vert_claire, fg = noir, font = (None, 22)).grid(row = 3, sticky = "w")
+        tk.Label(self.frame_fiche_membre_vals_g, text = mem[7], bg = vert_claire, fg = vert_foncé, font = (None, 20)).grid(row = 4, sticky = "w")
 
     def frame_fiche_membre_actif(self, mem):
         self.frame_fiche_membre(mem)
@@ -822,19 +825,19 @@ class Interface(tk.Tk):
         
         self.INIT()
 
-        self.frame_his_trans_fond = tk.Frame(self, bg = "#e0f5a1")
+        self.frame_his_trans_fond = tk.Frame(self, bg = vert_claire)
         self.frame_his_trans_fond.grid()
 
-        self.frame_his_trans_heading = tk.Frame(self.frame_his_trans_fond, bg = "#e0f5a1")
+        self.frame_his_trans_heading = tk.Frame(self.frame_his_trans_fond, bg = vert_claire)
         self.frame_his_trans_heading.grid(row = 1, sticky = "nw")   
 
-        self.frame_his_trans_table = tk.Frame(self.frame_his_trans_fond, bg = "#eb7c21", borderwidth = 2)
+        self.frame_his_trans_table = tk.Frame(self.frame_his_trans_fond, bg = orange, borderwidth = 2)
         self.frame_his_trans_table.grid(row = 2, pady = 20, padx = 35)
         
-        self.frame_his_trans_buttons = tk.Frame(self.frame_his_trans_fond, bg = "#e0f5a1")
+        self.frame_his_trans_buttons = tk.Frame(self.frame_his_trans_fond, bg = vert_claire)
         self.frame_his_trans_buttons.grid(row = 3, sticky = "we")
         
-        self.label = tk.Label(self.frame_his_trans_heading, text = "Liste de toutes les transactions", bg = "#e0f5a1", fg = "#305206", font = ("Oswald", 30))
+        self.label = tk.Label(self.frame_his_trans_heading, text = "Liste de toutes les transactions", bg = vert_claire, fg = vert_foncé, font = ("Oswald", 30))
         self.label.pack()
         
         table_trans = ttk.Treeview(self.frame_his_trans_table, columns = (1, 2, 3, 4, 5), show = 'headings', height = 30)
@@ -861,13 +864,13 @@ class Interface(tk.Tk):
         for i in range(len(get_transaction())):
             table_trans.insert(parent = '', index = i, iid = i, values = (get_transaction()[i]))
 
-        self.bouton_ajouter_trans = tk.Button(self.frame_his_trans_buttons, text = "Ajouter\nune transaction\n", font = ("Montserrat", 14), bg = "#eb7c21", fg = "#444444", relief = FLAT, command = lambda: self.frame_add_trans_actif())
+        self.bouton_ajouter_trans = tk.Button(self.frame_his_trans_buttons, text = "Ajouter\nune transaction\n", font = ("Montserrat", 14), bg = orange, fg = noir, relief = FLAT, command = lambda: self.frame_add_trans_actif())
         self.bouton_ajouter_trans.pack(side = LEFT)
 
-        self.bouton_supr_trans = tk.Button(self.frame_his_trans_buttons, text = "Suprimer\nla transaction\n", font = ("Montserrat", 14), bg = "#e0f5a1", fg = "#444444", relief = FLAT, command = lambda: suppr_trans())
+        self.bouton_supr_trans = tk.Button(self.frame_his_trans_buttons, text = "Suprimer\nla transaction\n", font = ("Montserrat", 14), bg = vert_claire, fg = noir, relief = FLAT, command = lambda: suppr_trans())
         self.bouton_supr_trans.pack(side = LEFT)
 
-        self.bouton_acceuil = tk.Button(self.frame_his_trans_buttons, text = "Revenir\nau\nmenu", font = ("Montserrat", 14), bg = "#e0f5a1", fg = "#444444", relief = FLAT, command = lambda: self.frame_acceuil_actif())
+        self.bouton_acceuil = tk.Button(self.frame_his_trans_buttons, text = "Revenir\nau\nmenu", font = ("Montserrat", 14), bg = vert_claire, fg = noir, relief = FLAT, command = lambda: self.frame_acceuil_actif())
         self.bouton_acceuil.pack(side = LEFT)
 
         def suppr_trans():
@@ -893,37 +896,37 @@ class Interface(tk.Tk):
 
         self.INIT()
 
-        self.frame_princ_trans_add = tk.Frame(self, bg = "#e0f5a1")
+        self.frame_princ_trans_add = tk.Frame(self, bg = vert_claire)
         self.frame_princ_trans_add.grid()
 
-        self.frame_trans_add_labelbuton = tk.Frame(self.frame_princ_trans_add, bg = "#e0f5a1")
+        self.frame_trans_add_labelbuton = tk.Frame(self.frame_princ_trans_add, bg = vert_claire)
         self.frame_trans_add_labelbuton.grid(rows = 1, sticky = "we")
 
-        self.frame_trans_add_tabl = tk.Frame(self.frame_princ_trans_add, bg = "#e0f5a1")
+        self.frame_trans_add_tabl = tk.Frame(self.frame_princ_trans_add, bg = vert_claire)
         self.frame_trans_add_tabl.grid(rows = 2, sticky = "we")
         
-        self.frame_trans_add_tabl_seed = tk.Frame(self.frame_trans_add_tabl, bg = "#e0f5a1")
+        self.frame_trans_add_tabl_seed = tk.Frame(self.frame_trans_add_tabl, bg = vert_claire)
         self.frame_trans_add_tabl_seed.pack(side = LEFT)
 
-        self.frame_trans_add_tabl_mem = tk.Frame(self.frame_trans_add_tabl, bg = "#e0f5a1")
+        self.frame_trans_add_tabl_mem = tk.Frame(self.frame_trans_add_tabl, bg = vert_claire)
         self.frame_trans_add_tabl_mem.pack(side = RIGHT)
 
-        self.frame_trans_add_choix = tk.Frame(self.frame_princ_trans_add, bg = "#e0f5a1")
+        self.frame_trans_add_choix = tk.Frame(self.frame_princ_trans_add, bg = vert_claire)
         self.frame_trans_add_choix.grid(rows = 3, sticky = "we")
 
-        self.frame_trans_add_choix_dr = tk.Frame(self.frame_trans_add_choix, bg = "#e0f5a1")
+        self.frame_trans_add_choix_dr = tk.Frame(self.frame_trans_add_choix, bg = vert_claire)
         self.frame_trans_add_choix_dr.grid(rows = 1, column = 0, sticky = "w")
 
-        self.frame_trans_add_choix_date = tk.Frame(self.frame_trans_add_choix_dr, bg = "#e0f5a1")
+        self.frame_trans_add_choix_date = tk.Frame(self.frame_trans_add_choix_dr, bg = vert_claire)
         self.frame_trans_add_choix_date.grid(rows = 2,column = 4, sticky = "e")
 
-        self.frame_trans_add_butons = tk.Frame(self.frame_princ_trans_add, bg = "#e0f5a1")
+        self.frame_trans_add_butons = tk.Frame(self.frame_princ_trans_add, bg = vert_claire)
         self.frame_trans_add_butons.grid(rows = 4, sticky = "we")
 
-        self.label_add = tk.Label(self.frame_trans_add_labelbuton, text = "Ajouter une transaction", bg = "#e0f5a1", fg = "#305206", font = ("Oswald", 30))
+        self.label_add = tk.Label(self.frame_trans_add_labelbuton, text = "Ajouter une transaction", bg = vert_claire, fg = vert_foncé, font = ("Oswald", 30))
         self.label_add.pack(side = LEFT, anchor = "w")
         
-        self.bouton_trans_add_retour = tk.Button(self.frame_trans_add_labelbuton, text = "Retour", font = ("Montserrat", 14), bg = "#ffc582", fg = "#444444", relief = FLAT, command = lambda: retour())
+        self.bouton_trans_add_retour = tk.Button(self.frame_trans_add_labelbuton, text = "Retour", font = ("Montserrat", 14), bg = orange_claire, fg = noir, relief = FLAT, command = lambda: retour())
         self.bouton_trans_add_retour.pack(side = RIGHT, anchor = "e")
         
         def retour():
@@ -991,10 +994,10 @@ class Interface(tk.Tk):
         for i in range(len(get_member())):
             table_mem.insert(parent = '', index = i, iid = i, values = (get_member()[i]))
         
-        self.bouton_trans_add_don = tk.Button(self.frame_trans_add_choix_dr, text = "Donation", font = ("Montserrat", 18), bg = "#ffc582", fg = "#444444", command = lambda: donclick())
+        self.bouton_trans_add_don = tk.Button(self.frame_trans_add_choix_dr, text = "Donation", font = ("Montserrat", 18), bg = orange_claire, fg = noir, command = lambda: donclick())
         self.bouton_trans_add_don.grid(row = 0, column = 0, pady = 10, padx = 20, sticky = "w")
 
-        self.bouton_trans_add_rec = tk.Button(self.frame_trans_add_choix_dr, text = "Réception", font = ("Montserrat", 18), bg = "#eb7c21", fg = "#444444", command = lambda: recclick())
+        self.bouton_trans_add_rec = tk.Button(self.frame_trans_add_choix_dr, text = "Réception", font = ("Montserrat", 18), bg = orange, fg = noir, command = lambda: recclick())
         self.bouton_trans_add_rec.grid(row = 2, column = 0)
 
         def donplusun():
@@ -1016,8 +1019,8 @@ class Interface(tk.Tk):
                 self.bouton_trans_add_don_entry.insert(0, 0)
 
         def donclick():
-            self.bouton_trans_add_don.config(bg = "#ffc582")
-            self.bouton_trans_add_rec.config(bg = "#eb7c21")
+            self.bouton_trans_add_don.config(bg = orange_claire)
+            self.bouton_trans_add_rec.config(bg = orange)
             #print("don")
             self.bouton_trans_add_don_g.grid(row = 1, column = 1)
             self.bouton_trans_add_don_entry.grid(row = 1, column = 2)
@@ -1028,14 +1031,14 @@ class Interface(tk.Tk):
             self.bouton_trans_add_don_entry.delete(0, tk.END)
             self.bouton_trans_add_don_entry.insert(0, 0)
         
-        self.bouton_trans_add_don_g = tk.Button(self.frame_trans_add_choix_dr, text = "⇦", font = ("Montserrat", 30), bg = "#e0f5a1", fg = "#444444", relief = FLAT, width = 1, command = lambda: donmoinsun()) 
+        self.bouton_trans_add_don_g = tk.Button(self.frame_trans_add_choix_dr, text = "⇦", font = ("Montserrat", 30), bg = vert_claire, fg = noir, relief = FLAT, width = 1, command = lambda: donmoinsun()) 
         self.bouton_trans_add_don_g.grid(row = 1, column = 1)
 
         self.bouton_trans_add_don_entry = tk.Entry(self.frame_trans_add_choix_dr, font = 30)
         self.bouton_trans_add_don_entry.grid(row = 1, column = 2)
         self.bouton_trans_add_don_entry.insert(0, 0) 
 
-        self.bouton_trans_add_don_d = tk.Button(self.frame_trans_add_choix_dr, text = "⇨", font = ("Montserrat", 30), bg = "#e0f5a1", fg = "#444444", width =1,  relief = FLAT, command = lambda: donplusun()) 
+        self.bouton_trans_add_don_d = tk.Button(self.frame_trans_add_choix_dr, text = "⇨", font = ("Montserrat", 30), bg = vert_claire, fg = noir, width =1,  relief = FLAT, command = lambda: donplusun()) 
         self.bouton_trans_add_don_d.grid(row = 1, column = 3)
         
         def recplusun():
@@ -1057,8 +1060,8 @@ class Interface(tk.Tk):
                 self.bouton_trans_add_rec_entry.insert(0, 0)
 
         def recclick():
-            self.bouton_trans_add_don.config(bg = "#eb7c21")
-            self.bouton_trans_add_rec.config(bg = "#ffc582")
+            self.bouton_trans_add_don.config(bg = orange)
+            self.bouton_trans_add_rec.config(bg = orange_claire)
             #print("rec")
             self.bouton_trans_add_rec_g.grid(row = 1, column = 1)
             self.bouton_trans_add_rec_entry.grid(row = 1, column = 2)
@@ -1069,26 +1072,26 @@ class Interface(tk.Tk):
             self.bouton_trans_add_rec_entry.delete(0, tk.END)
             self.bouton_trans_add_rec_entry.insert(0, 0)
 
-        self.bouton_trans_add_rec_g = tk.Button(self.frame_trans_add_choix_dr, text = "⇦", font = ("Montserrat", 30), bg = "#e0f5a1", fg = "#444444", relief = FLAT, width = 1, command = lambda: recmoinsun()) 
+        self.bouton_trans_add_rec_g = tk.Button(self.frame_trans_add_choix_dr, text = "⇦", font = ("Montserrat", 30), bg = vert_claire, fg = noir, relief = FLAT, width = 1, command = lambda: recmoinsun()) 
         self.bouton_trans_add_rec_g.grid(row = 1, column = 1)
 
         self.bouton_trans_add_rec_entry = tk.Entry(self.frame_trans_add_choix_dr, font = 30)
         self.bouton_trans_add_rec_entry.grid(row = 1, column = 2)
         self.bouton_trans_add_rec_entry.insert(0, 0) 
 
-        self.bouton_trans_add_rec_d = tk.Button(self.frame_trans_add_choix_dr, text = "⇨", font = ("Montserrat", 30), bg = "#e0f5a1", fg = "#444444", width =1,  relief = FLAT, command = lambda: recplusun()) 
+        self.bouton_trans_add_rec_d = tk.Button(self.frame_trans_add_choix_dr, text = "⇨", font = ("Montserrat", 30), bg = vert_claire, fg = noir, width =1,  relief = FLAT, command = lambda: recplusun()) 
         self.bouton_trans_add_rec_d.grid(row = 1, column = 3)
 
         self.bouton_trans_add_rec_g.grid_forget()
         self.bouton_trans_add_rec_entry.grid_forget()
         self.bouton_trans_add_rec_d.grid_forget()
 
-        labdate = ttk.Label(self.frame_trans_add_choix_date, text = "Choix d'une date", background = "#e0f5a1", font = ("Montserrat", 20))
+        labdate = ttk.Label(self.frame_trans_add_choix_date, text = "Choix d'une date", background = vert_claire, font = ("Montserrat", 20))
         labdate.pack(padx = 40, pady = 10)
-        cal = DateEntry(self.frame_trans_add_choix_date, width = 20, background = "#eb7c21", font = ("Montserrat", 15), borderwidth = 2)
+        cal = DateEntry(self.frame_trans_add_choix_date, width = 20, background = orange, font = ("Montserrat", 15), borderwidth = 2)
         cal.pack(padx = 40, pady = 10)
         
-        self.bouton_trans_add_save = tk.Button(self.frame_trans_add_butons, text = "Sauvegarder la\nnouvelle transaction", font = ("Montserrat", 14), bg = "#eb7c21", fg = "#444444", relief = FLAT, command = lambda: save_trans()) 
+        self.bouton_trans_add_save = tk.Button(self.frame_trans_add_butons, text = "Sauvegarder la\nnouvelle transaction", font = ("Montserrat", 14), bg = orange, fg = noir, relief = FLAT, command = lambda: save_trans()) 
         self.bouton_trans_add_save.pack()       
 
         def save_trans():
