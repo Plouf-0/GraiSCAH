@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import PhotoImage, ttk, messagebox 
 from tkinter.constants import BOTTOM, FLAT, LEFT, YES, BOTH, RIGHT, Y, X, VERTICAL, NO, CENTER, TOP
 
-from main import *
+from DBmanagement import *
 from cstecouleur import *
 
 from tkcalendar import DateEntry
