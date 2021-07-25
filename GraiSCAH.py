@@ -9,8 +9,6 @@ from tkcalendar import DateEntry
 
 ######################################################
 
-
-
 class Interface(tk.Tk):
     
     def __init__(self):
@@ -305,7 +303,7 @@ class Interface(tk.Tk):
                             self.desc_entry.delete(0, tk.END)
                             self.ann_entry.delete(0, tk.END)
                             self.mois_entry.delete(0, tk.END)
-                            self.obs_entry.delete(0, tk.END)
+                            self.obs_entry.delete("1.0", tk.END)
                     else:messagebox.showerror("Erreur", "Il faut choisir une catégorie")        
                 else:messagebox.showerror("Erreur", "La descendance doit être un nombre entier")
             else:messagebox.showerror("Erreur", "La quantité doit être un nombre entier")
