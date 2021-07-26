@@ -9,8 +9,6 @@ from tkcalendar import DateEntry
 
 ######################################################
 
-
-
 class Interface(tk.Tk):
     
     def __init__(self):
@@ -305,7 +303,7 @@ class Interface(tk.Tk):
                             self.desc_entry.delete(0, tk.END)
                             self.ann_entry.delete(0, tk.END)
                             self.mois_entry.delete(0, tk.END)
-                            self.obs_entry.delete(0, tk.END)
+                            self.obs_entry.delete("1.0", tk.END)
                     else:messagebox.showerror("Erreur", "Il faut choisir une catégorie")        
                 else:messagebox.showerror("Erreur", "La descendance doit être un nombre entier")
             else:messagebox.showerror("Erreur", "La quantité doit être un nombre entier")
@@ -1002,21 +1000,24 @@ class Interface(tk.Tk):
 
         def donplusun():
             val = self.bouton_trans_add_don_entry.get()
-            #print(val)
-            self.bouton_trans_add_don_entry.delete(0, tk.END)
-            self.bouton_trans_add_don_entry.insert(0, int(val) + 1)
+            if int(val) >=0 :
+                self.bouton_trans_add_don_entry.delete(0, tk.END)
+                self.bouton_trans_add_don_entry.insert(0, int(val) + 1)
             if int(val) < 0:
                 self.bouton_trans_add_don_entry.delete(0, tk.END)
                 self.bouton_trans_add_don_entry.insert(0, 0)
+            print(val)
+        
         def donmoinsun():
             val = self.bouton_trans_add_don_entry.get()
-            #print(val)
-            if int(val) > 0:
+            
+            if int(val) >= 0:
                 self.bouton_trans_add_don_entry.delete(0, tk.END)
                 self.bouton_trans_add_don_entry.insert(0, int(val) - 1)
             elif int(val) < 0:
                 self.bouton_trans_add_don_entry.delete(0, tk.END)
                 self.bouton_trans_add_don_entry.insert(0, 0)
+            print(val)
 
         def donclick():
             self.bouton_trans_add_don.config(bg = orange_claire)
@@ -1049,6 +1050,7 @@ class Interface(tk.Tk):
             if int(val) < 0:
                 self.bouton_trans_add_rec_entry.delete(0, tk.END)
                 self.bouton_trans_add_rec_entry.insert(0, 0)
+        
         def recmoinsun():
             val = self.bouton_trans_add_rec_entry.get()
             #print(val)
@@ -1099,8 +1101,12 @@ class Interface(tk.Tk):
             select_mem = table_mem.focus()
             don = int(self.bouton_trans_add_don_entry.get())
             rec = int(self.bouton_trans_add_rec_entry.get())
-            #print(don, rec)
-            qte = don
+            print(don, rec)
+            
+            if don == 0:
+                qte = -rec
+            else:
+                qte = don
             
             if not select_seed:
                 messagebox.showerror("Erreur", "Il faut sélectionner une graine")
@@ -1111,12 +1117,11 @@ class Interface(tk.Tk):
                     messagebox.showerror("Erreur", "Il faut sélectionner un membre")
                 else: 
                     mem = table_mem.item(select_mem, 'values')
-                    #print(mem)
-                    if don and rec == 0:
+                    print(mem)
+                    if int(don)== 0 and int(rec) == 0:
                         messagebox.showerror("Erreur", "Il faut une valeur de don ou de reception positive")
                     else:
-                        if don == 0:
-                            qte = -rec 
+                         
                         add_transaction( None, mem[0], seed[0], cal.get_date(), int(qte))
                         messagebox.showinfo("Transaction", "La transaction a était enregistrée.")
                
@@ -1138,19 +1143,19 @@ class Interface(tk.Tk):
         menuFile.add_command(label = "Transactions", command = lambda: self.frame_transhist_actif())
         menuFile.add_separator()
         menuFile.add_command(label = "Exit", command = self.quit)
-        menuBar.add_cascade( label = "File", menu=menuFile)
+        menuBar.add_cascade( label = "Menu", menu=menuFile)
 
-        menuEdit = tk.Menu(menuBar, tearoff=0)
+        """menuEdit = tk.Menu(menuBar, tearoff=0)
         menuEdit.add_command(label ="Undo", command = self.doSomething)
         menuEdit.add_separator()
         menuEdit.add_command(label = "Copy", command = self.doSomething)
         menuEdit.add_command(label = "Cut", command = self.doSomething)
         menuEdit.add_command(label = "Paste", command = self.doSomething)
-        menuBar.add_cascade( label = "Edit", menu = menuEdit)
+        menuBar.add_cascade( label = "Edit", menu = menuEdit)"""
 
-        menuHelp = tk.Menu(menuBar, tearoff = 0)
+        """menuHelp = tk.Menu(menuBar, tearoff = 0)
         menuHelp.add_command(label = "About", command = self.doSomething)
-        menuBar.add_cascade( label = "Help", menu = menuHelp)
+        menuBar.add_cascade( label = "Help", menu = menuHelp)"""
  
         self.config(menu = menuBar)        
         

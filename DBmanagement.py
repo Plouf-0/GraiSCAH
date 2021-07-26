@@ -1,3 +1,4 @@
+from sqlite3.dbapi2 import enable_callback_tracebacks
 from DBconnect import DB
 import sqlite3
 
@@ -13,9 +14,13 @@ def main_add_graines(Id, name, category_id, color, quantity, descent, harvest_da
 
     try:
         if Id == None:
-            cursor.execute("""SELECT ID FROM Graines ;""")
-            rows = cursor.fetchall()
-            row = rows[-1][0] + 1
+            try:
+                cursor.execute("""SELECT ID FROM Graines ;""")
+                rows = cursor.fetchall()
+                print(rows)
+                row = rows[-1][0] + 1
+            except:
+                row = 0
         else:
             row = Id
 
@@ -85,9 +90,12 @@ def main_add_member(Id, name, fname, phone, email, city, donation, reception):
 
     try:
         if Id == None:
-            cursor.execute("""SELECT ID FROM Membres ;""")
-            rows = cursor.fetchall()
-            row = rows[-1][0] + 1
+            try:
+                cursor.execute("""SELECT ID FROM Membres ;""")
+                rows = cursor.fetchall()
+                row = rows[-1][0] + 1
+            except:
+                row = 0
         else:
             row = Id
         parameter = """INSERT or IGNORE INTO Membres (ID, Name, Fname, Phone, Email, City, Donation, Reception) VALUES (?, ?, ?, ?, ?, ?, ?, ?) ;"""
@@ -156,9 +164,12 @@ def add_category(Id, name):
 
     try:
         if Id == None:
-            cursor.execute("""SELECT ID FROM Category ;""")
-            rows = cursor.fetchall()
-            row = rows[-1][0] + 1
+            try:
+                cursor.execute("""SELECT ID FROM Category ;""")
+                rows = cursor.fetchall()
+                row = rows[-1][0] + 1
+            except:
+                row = 0
         else:
             row = Id
 
@@ -200,9 +211,12 @@ def add_transaction(Id, member_id, seed_id, date, quantity):
 
     try:
         if Id == None:
-            cursor.execute("""SELECT ID FROM Transactions ;""")
-            rows = cursor.fetchall()
-            row = rows[-1][0] + 1
+            try:
+                cursor.execute("""SELECT ID FROM Transactions ;""")
+                rows = cursor.fetchall()
+                row = rows[-1][0] + 1
+            except:
+                row = 0
         else:
             row = Id
         
