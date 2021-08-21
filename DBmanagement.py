@@ -176,9 +176,23 @@ def add_category(Id, name):
         parameter = """INSERT or IGNORE INTO Category (ID, Name) VALUES (?, ?) ;"""
         comm = (row, name)
         cursor.execute(parameter, comm)
-        
-      
         print("category added")
+    
+    except sqlite3.Error as error:
+        print(error)
+        conn.rollback()
+    conn.commit()
+
+
+def modif_category(Id, name):
+        
+    conn, cursor = DB.connect() 
+
+    try:
+        parameter = """UPDATE Category SET Name = ? WHERE ID = ? ;"""        
+        comm = (name, Id)
+        cursor.execute(parameter, comm)
+        print("category modified")
     
     except sqlite3.Error as error:
         print(error)
@@ -200,6 +214,19 @@ def get_category():
     conn.commit()  
     
     return rows   
+
+def del_cate(Id):
+
+    conn, cursor = DB.connect()
+
+    try:
+        cursor.execute("DELETE FROM Category WHERE ID = %s ;" % Id)
+        print("cate deleted")
+
+    except sqlite3.Error as error:
+        print(error)
+        conn.rollback()
+    conn.commit() 
 
 
 ###"""""""""""""""Partie Transaction"""""""""""""""###
@@ -321,7 +348,7 @@ def del_trans(trs):
 
 #get_seeds_values()    
 #[(0, 'coucourge', 'orange avec des points noirs', 21, 0, None, '2021', 'en mai', 'elles ne sont en fait pas orange mais bleu'), (1, 'popotirond', 'vert claire', 35, 1, 7, '2020', 'en juin', 'pas mal en soupe')]
-#main_modif_graines(2, "poti", 1, "vert", 12, 6, 123, "dfgh", "sdfgsdfgsdfg")
+#main_modif_graines(2, "poti", 1, "vert", 12, 6, 123, "dforegroundh", "sdforegroundsdforegroundsdforeground")
 #add_member(None ,"Didou", 2, 5)
 #del_seed(104)
 #add_category(None , "Carottes")
