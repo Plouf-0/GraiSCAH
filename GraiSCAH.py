@@ -4,8 +4,7 @@ from tkinter.constants import BOTTOM, FLAT, LEFT, YES, BOTH, RIGHT, Y, X, VERTIC
 
 from DBmanagement import *
 from cstecouleur import *
-
-#from tkcalendar import DateEntry
+from PDFseed import *
 
 ######################################################
 
@@ -14,7 +13,7 @@ class Interface(tk.Tk):
     def __init__(self):
         tk.Tk.__init__(self)
         
-        self.minsize(1024, 810)
+        self.minsize(1024, 830)
         self.maxsize(2048, 500000)
         self.title("Grainotheque SCAH   Section Jardinage")
         self.iconbitmap("LOGO_SCAH_OFFICIEL_2014-1_avec_titre.ico")
@@ -131,9 +130,16 @@ class Interface(tk.Tk):
 
         self.frame_his_grain_table = tk.Frame(self.frame_his_grain_fond, background = orange, borderwidth = 2)
         self.frame_his_grain_table.grid(row = 2, pady = 20, padx = 35)
+
+        self.frame_his_grain_utable = tk.Frame(self.frame_his_grain_fond, background = vert_claire, borderwidth = 2)
+        self.frame_his_grain_utable.grid(row = 3, pady = 20, padx = 35, sticky = "w")
         
-        self.frame_his_grain_buttons = tk.Frame(self.frame_his_grain_fond, background = vert_claire)
-        self.frame_his_grain_buttons.grid(row = 3, sticky = "we")
+        self.frame_his_grain_buttons = tk.Frame(self.frame_his_grain_utable, background = vert_claire)
+        self.frame_his_grain_buttons.grid(row = 0, column = 0, sticky = "w")
+
+        self.frame_his_grain_pdf = tk.Frame(self.frame_his_grain_utable, background = vert_claire)
+        self.frame_his_grain_pdf.grid(row = 0, column = 1, sticky = "we", padx = 30)
+        self.frame_his_grain_pdf.grid_forget()
 
         self.label = tk.Label(self.frame_his_grain_heading, text = "Inventaire de toutes les graines disponibles", background = vert_claire, foreground = vert_foncé, font = ("Oswald", 30))
         self.label.pack()
@@ -143,14 +149,43 @@ class Interface(tk.Tk):
             l = [(tv.set(k, col), k) for k in tv.get_children('')]
             try:
                 l.sort(key=lambda t: int(t[0]), reverse=reverse)
-            
+                
             except ValueError:
                 l.sort(reverse=reverse)
 
             for index, (val, k) in enumerate(l):
                 tv.move(k, '', index)
-
+            print(l)
             tv.heading(col, command=lambda: treeview_sort_column(tv, col, not reverse))
+        
+        def but(table, l):
+            res = []
+            temp = []
+            for i in range(len(table)):
+                for j in range(len(table[0])):
+                    if j not in l:
+                        temp = temp + [table[i][j]]
+                res = res + [temp]
+                temp = []
+            return res 
+        
+        def switch(table, l):
+            for i in range(len(table)):
+                table[i][l[0]], table[i][l[1]] = table[i][l[1]], table[i][l[0]]
+            #print(table)
+            return table
+        
+        def sortspe(table, e):
+            return sorted(table, key = lambda x: x[e])
+
+        def ind(table, e):
+            res = 0
+            for i in range(len(table)):
+                if e == table[i][0]:
+                    res = i
+            return res
+
+        lis = [('Catégorie'), ('Nom'), ('Couleur'), ('Quantité'), ('Descendance'), ('Année de récolte'), ('Mois de plantation')]
 
         table_seeds = ttk.Treeview(self.frame_his_grain_table, columns = (1, 2, 3, 4, 5, 6, 7, 8, 9), show = 'headings', height = 30)
         table_seeds.pack(side = LEFT)
@@ -196,11 +231,21 @@ class Interface(tk.Tk):
         self.bouton_supr_graine = tk.Button(self.frame_his_grain_buttons, text = "Suprimer\nla graine\n", font = ("Montserrat", 14), background = vert_claire, foreground = noir, relief = FLAT, command = lambda: suppr_graine())
         self.bouton_supr_graine.pack(side = LEFT)
 
-        self.bouton_undo_graine = tk.Button(self.frame_his_grain_buttons, text = "Annuler\naction\n(wip)", font = ("Montserrat", 14), background = vert_claire, foreground = noir, relief = FLAT, command = lambda: annuler_action())
+        self.bouton_undo_graine = tk.Button(self.frame_his_grain_buttons, text = "Annuler\naction\n(wip)", font = ("Montserrat", 14), background = vert_claire, foreground = noir, relief = FLAT, command = lambda: [annuler_action(), print(table_seeds.get_children())])
         self.bouton_undo_graine.pack(side = LEFT)
+
+        self.bouton_create = tk.Button(self.frame_his_grain_buttons, text = "Génération\ndu\nPDF", font = ("Montserrat", 14), background = vert_claire, foreground = noir, relief = FLAT, command = lambda:self.frame_his_grain_pdf.grid(row = 0, column = 1, sticky = "we", padx = 20))
+        self.bouton_create.pack(side = LEFT)
 
         self.bouton_accueil = tk.Button(self.frame_his_grain_buttons, text = "Revenir\nau\nmenu", font = ("Montserrat", 14), background = vert_claire, foreground = noir, relief = FLAT, command = lambda: self.frame_accueil_actif())
         self.bouton_accueil.pack(side = LEFT)
+
+        self.bouton_generate = tk.Button(self.frame_his_grain_pdf, text = "Générer", font = ("Montserrat", 14), background = vert_claire, foreground = noir, relief = FLAT, command = lambda: pdf_generation(self.pdf_sort.get()))
+        self.bouton_generate.pack(side = LEFT)
+
+        self.pdf_sort = ttk.Combobox(self.frame_his_grain_pdf, values = lis, state = 'readonly')
+        self.pdf_sort.set("Choisir catégorie")
+        self.pdf_sort.pack(side = LEFT, padx = 5)
 
         def select_graine():
             selected = table_seeds.focus()
@@ -228,7 +273,13 @@ class Interface(tk.Tk):
                     del_seed(seed[0])
                     messagebox.showinfo("Information", "La graine "+seed[1]+" a était suprimée")
                     self.frame_graineshist_actif()
-                
+
+        def pdf_generation(choix):
+            lis = [['Catégorie'], ['Nom'], ['Couleur'], ['Quantité'], ['Descendance'], ['Année de récolte'], ['Mois de plantation']]
+            e = ind(lis, choix)
+            generate_seed_pdf(sortspe(switch(switch(switch(but(get_seeds_values(), [0,8]), [0,1]), [0,3]), [2,3]), e))
+            messagebox.showinfo('PDF', 'Le pdf a était généré.')
+
         def annuler_action():
             selected = table_seeds.focus()
             if not selected:
@@ -328,7 +379,7 @@ class Interface(tk.Tk):
                 if cate != "C":
                     rep = messagebox.askquestion("Sauvegarde", "Confirmer la sauvegarde ?")
                     if rep == 'yes':
-                        main_add_graines(None, self.name_entry.get(), self.cate_box.get()[0], self.color_entry.get(), self.qte_entry.get(), self.desc_box.get(), self.ann_box.get(), self.mois_entry.get(), self.obs_entry.get("1.0", tk.END))
+                        main_add_graines(None, self.name_entry.get().lower(), self.cate_box.get()[0], self.color_entry.get(), self.qte_entry.get(), self.desc_box.get(), self.ann_box.get(), self.mois_entry.get(), self.obs_entry.get("1.0", tk.END))
                         self.name_entry.delete(0, tk.END)
                         self.color_entry.delete(0, tk.END)
                         self.qte_entry.delete(0, tk.END)
@@ -443,7 +494,7 @@ class Interface(tk.Tk):
                 if rep == 'yes':
                     selection = self.cate_box.get()
                     cate_id = [int(s) for s in selection.split() if s.isdigit()]
-                    main_modif_graines(seed[0], self.name_entry.get(), cate_id[0], self.color_entry.get(), self.qte_entry.get(), self.desc_box.get(), self.ann_box.get(), self.mois_entry.get(), self.obs_entry.get("1.0", tk.END))
+                    main_modif_graines(seed[0], self.name_entry.get().lower(), cate_id[0], self.color_entry.get(), self.qte_entry.get(), self.desc_box.get(), self.ann_box.get(), self.mois_entry.get(), self.obs_entry.get("1.0", tk.END))
                     self.frame_graineshist_actif()
             else:
                 messagebox.showerror("Erreur", "La quantité doit être un nombre entier")
