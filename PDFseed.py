@@ -43,7 +43,7 @@ def generate_seed_pdf(data):
     csort = 'TRIE'
     entete = Entete('Trié en fonction de', '%s' %csort , datetime.now().strftime('%d/%m/%Y'))
 
-    file_name = 'Inventaire du %s.pdf' %datetime.now().strftime('%d.%m.%Y')#;%S')
+    file_name = 'Inventaire du %s.pdf' %datetime.now().strftime('%d.%m.%Y;%S')
     document_title = 'Inventaire De La Grainotheque SCAH'
     title = 'Inventaire De La Grainotheque SCAH'
     indication = entete.indication
