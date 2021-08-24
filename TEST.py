@@ -116,7 +116,7 @@ Button(
     padx=20, 
     pady=10, 
     bg='#081947', 
-    fg='#fff', 
+    foreground='#fff', 
     font=('Times BOLD', 12)
     ).pack(pady=10)
 
@@ -359,9 +359,9 @@ app.mainloop()"""
 import tkinter as tk
 from tkinter import ttk
 
-from tkcalendar import Calendar, DateEntry
+#from tkcalendar import Calendar, DateEntry
 
-def example1():
+"""def example1():
     def print_sel():
         print(cal.selection_get())
 
@@ -406,4 +406,48 @@ ttk.Button(root, text='Calendar', command=example1).pack(padx=10, pady=10)
 ttk.Button(root, text='Calendar with events', command=example2).pack(padx=10, pady=10)
 ttk.Button(root, text='DateEntry', command=example3).pack(padx=10, pady=10)
 
-root.mainloop()
+root.mainloop()"""
+
+"""try:
+    from tkinter import *
+    from tkinter import ttk
+except ImportError:
+    from Tkinter import *
+    import ttk
+
+def treeview_sort_column(tv, col, reverse):
+    print(col)
+    l = [(tv.set(k, col), k) for k in tv.get_children('')]
+    print(l)
+    l.sort(key=lambda t: int(t[0]), reverse=reverse)
+
+    for index, (val, k) in enumerate(l):
+        tv.move(k, '', index)
+
+    tv.heading(col, command=lambda: treeview_sort_column(tv, col, not reverse))
+               
+
+root = Tk()
+columns = ('number', 'bleu')
+treeview = ttk.Treeview(root, columns=columns, show='headings')
+for t in ('1', '10', '11', '2', '3'):
+    treeview.insert('', END, values=(t,))
+treeview.pack()
+for col in columns:
+    print(col)
+    treeview.heading(col, text=col, command=lambda c=col: treeview_sort_column(treeview, c, False))
+
+mainloop()"""
+
+a = ['poti', 'popotirond', 'popoticarré', 'popoticarré', 'popoticarré', 'la courgette de teste', 'fghj', 'Name', '', '']
+
+b = sorted(a , key= lambda word: word.lower(),reverse = False)
+#print(b)
+
+normal = ['', '', 'fghj', 'la courgette de teste', 'Name', 'popoticarré', 'popoticarré', 'popoticarré', 'popotirond', 'poti']
+inverse = ['poti', 'popotirond', 'popoticarré', 'popoticarré', 'popoticarré', 'Name', 'la courgette de teste', 'fghj', '', '']
+
+def upperf(w):       
+    return w.replace(w[0], w[0].upper())
+
+print(upperf(("bleu")))
