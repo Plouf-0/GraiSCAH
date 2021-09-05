@@ -158,6 +158,8 @@ class Interface(tk.Tk):
             print(l)
             tv.heading(col, command=lambda: treeview_sort_column(tv, col, not reverse))
         
+
+        
         def but(table, l):
             res = []
             temp = []
